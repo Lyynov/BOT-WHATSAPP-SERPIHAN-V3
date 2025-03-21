@@ -47,6 +47,12 @@ async function processRegistrationStep(sock, msg, remoteJid, currentStep, userSt
     case 'waitingForPendapatanOrtu':
       await handlePendapatanOrtuInput(sock, remoteJid, input, userStateManager);
       break;
+    case 'waitingForAirBersih':
+      await handleAirBersihInput(sock, remoteJid, input, userStateManager);
+      break;
+    case 'waitingForPembuanganSampah':
+      await handlePembuanganSampahInput(sock, remoteJid, input, userStateManager);
+      break;
   }
 }
 
@@ -273,7 +279,49 @@ async function handlePendapatanOrtuInput(sock, remoteJid, input, userStateManage
   }
   
   const pendapatanOrtu = pendapatanMap[input];
+  userStateManager.updateState(remoteJid, { step: 'waitingForAirBersih' });
   userStateManager.updateRegistrationData(remoteJid, { pendapatanOrtu });
+  
+  await sock.sendMessage(remoteJid, { text: messages.PENDAPATAN_ORTU_SUCCESS(pendapatanOrtu) });
+}
+
+/**
+ * Handle clean water access selection
+ */
+async function handleAirBersihInput(sock, remoteJid, input, userStateManager) {
+  const airBersihMap = {
+    '1': 'Ada, air mengalir lancar',
+    '2': 'Tidak ada, air tidak mengalir lancar'
+  };
+  
+  if (!airBersihMap[input]) {
+    await sock.sendMessage(remoteJid, { text: messages.AIR_BERSIH_INVALID });
+    return;
+  }
+  
+  const airBersih = airBersihMap[input];
+  userStateManager.updateState(remoteJid, { step: 'waitingForPembuanganSampah' });
+  userStateManager.updateRegistrationData(remoteJid, { airBersih });
+  
+  await sock.sendMessage(remoteJid, { text: messages.AIR_BERSIH_SUCCESS(airBersih) });
+}
+
+/**
+ * Handle waste management selection
+ */
+async function handlePembuanganSampahInput(sock, remoteJid, input, userStateManager) {
+  const pembuanganSampahMap = {
+    '1': 'Dikelola, penghuni rumah mengelola sampah dengan baik',
+    '2': 'Tidak dikelola, penguni rumah membuang sampah di sembarang tempat'
+  };
+  
+  if (!pembuanganSampahMap[input]) {
+    await sock.sendMessage(remoteJid, { text: messages.PEMBUANGAN_SAMPAH_INVALID });
+    return;
+  }
+  
+  const pembuanganSampah = pembuanganSampahMap[input];
+  userStateManager.updateRegistrationData(remoteJid, { pembuanganSampah });
   
   try {
     const userData = userStateManager.getRegistrationData(remoteJid);
