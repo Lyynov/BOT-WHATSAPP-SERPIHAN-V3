@@ -3,14 +3,16 @@
  */
 module.exports = {
   // Welcome message
-  WELCOME_MESSAGE: 'Selamat datang pada bot pintar serpihan!\n\nPilih menu dengan mengetik nomor:\n1. Daftar\n2. Cek-data',
-  
+  LOGIN_WELCOME: 'Selamat datang pada bot pintar serpihan!\n\nSilahkan pilih menu:\n1. Login\n2. Daftar\n3. Cek-data',
+  //LOGIN NAME MESSAGE
+  ASK_LOGIN_NAME: 'Silahkan masukkan nama anak Anda untuk login:',
   // Registration messages
   ASK_NAME: 'Silahkan masukan nama anak anda:',
   
   // Data check messages
   CHECK_DATA: 'Berikut data Anda...',
-  
+
+ 
   // Success messages
   NAME_SUCCESS: (nama) => `Nama anak berhasil disimpan: ${nama}\n\nSelanjutnya, silahkan masukkan tanggal lahir anak dengan format DD-MM-YYYY:`,
   BIRTHDATE_SUCCESS: (tanggalLahir) => `Tanggal lahir berhasil disimpan: ${tanggalLahir}\n\nSelanjutnya, silahkan masukkan alamat lengkap:`,
@@ -22,23 +24,28 @@ module.exports = {
   PEKERJAAN_AYAH_SUCCESS: (pekerjaanAyah) => `Pekerjaan ayah berhasil dipilih: ${pekerjaanAyah}\n\nSelanjutnya, silahkan pilih pendidikan terakhir ibu:\n1. SD\n2. SMP/MTsN\n3. SMA/MAN/SMK\n4. D1/D2/D3\n5. S1/S2/S3`,
   PENDIDIKAN_IBU_SUCCESS: (pendidikanIbu) => `Pendidikan terakhir ibu berhasil dipilih: ${pendidikanIbu}\n\nSelanjutnya, silahkan pilih pekerjaan ibu:\n1. Wiraswasta\n2. Karyawan\n3. Tidak bekerja/IRT\n4. Lain-lain`,
   PEKERJAAN_IBU_SUCCESS: (pekerjaanIbu) => `Pekerjaan ibu berhasil dipilih: ${pekerjaanIbu}\n\nSelanjutnya, silahkan pilih pendapatan orang tua:\n1. ≤ Rp.500.000\n2. Rp.500.000- Rp.1.000.000\n3. Rp.1.000.000- Rp.2.000.000\n4. Rp.2.000.000- Rp.3.000.000\n5. > Rp.3.000.000`,
-  
-  // Registration complete message
-  REGISTRATION_COMPLETE: (userData) => 
-    `✅ Pendaftaran berhasil diselesaikan!\n\n` +
-    `📋 Ringkasan data:\n` +
-    `- Nama: ${userData.nama}\n` +
-    `- Tanggal Lahir: ${userData.tanggalLahir}\n` +
-    `- Alamat: ${userData.alamat}\n` +
-    `- Rumah Pelita: ${userData.asalRumahPelita}\n` +
-    `- Jenis Kelamin: ${userData.jenisKelamin}\n` +
-    `- Kategori Umur: ${userData.umur}\n` +
-    `- Pendidikan Ayah: ${userData.pendidikanAyah}\n` +
-    `- Pekerjaan Ayah: ${userData.pekerjaanAyah}\n` +
-    `- Pendidikan Ibu: ${userData.pendidikanIbu}\n` +
-    `- Pekerjaan Ibu: ${userData.pekerjaanIbu}\n` +
-    `- Pendapatan Orang Tua: ${userData.pendapatanOrtu}\n\n` +
-    `Terima kasih telah mendaftar! 🙏`,
+  PENDAPATAN_ORTU_SUCCESS: (pendapatanOrtu) => `Pendapatan orang tua berhasil dipilih: ${pendapatanOrtu}\n\nSelanjutnya, silahkan pilih ketersediaan sumber air bersih secara kontinyu:\n1. Ada, air mengalir lancar\n2. Tidak ada, air tidak mengalir lancar`,
+  AIR_BERSIH_SUCCESS: (airBersih) => `Ketersediaan air bersih berhasil dipilih: ${airBersih}\n\nSelanjutnya, silahkan pilih mekanisme pembuangan sampah:\n1. Dikelola, penghuni rumah mengelola sampah dengan baik, misal ditimbun, dibakar atau dibuang ke TPS\n2. Tidak dikelola, penguni rumah membuang sampah di sembarang tempat atau dibiarkan saja`,
+  LOGIN_SUCCESS: (nama) => `Login berhasil. Selamat datang, orang tua dari ${nama}!\n\nSilahkan pilih kuisioner:\n1. INFANT/TODDLER HOME RECORD\n2. EARLY CHILDHOOD HOME RECORD\n3. POLA ASUH ORANG TUA`,
+ 
+  // Update REGISTRATION_COMPLETE to include new fields
+REGISTRATION_COMPLETE: (userData) => 
+  `✅ Pendaftaran berhasil diselesaikan!\n\n` +
+  `📋 Ringkasan data:\n` +
+  `- Nama: ${userData.nama}\n` +
+  `- Tanggal Lahir: ${userData.tanggalLahir}\n` +
+  `- Alamat: ${userData.alamat}\n` +
+  `- Rumah Pelita: ${userData.asalRumahPelita}\n` +
+  `- Jenis Kelamin: ${userData.jenisKelamin}\n` +
+  `- Kategori Umur: ${userData.umur}\n` +
+  `- Pendidikan Ayah: ${userData.pendidikanAyah}\n` +
+  `- Pekerjaan Ayah: ${userData.pekerjaanAyah}\n` +
+  `- Pendidikan Ibu: ${userData.pendidikanIbu}\n` +
+  `- Pekerjaan Ibu: ${userData.pekerjaanIbu}\n` +
+  `- Pendapatan Orang Tua: ${userData.pendapatanOrtu}\n` +
+  `- Ketersediaan Air Bersih: ${userData.airBersih}\n` +
+  `- Mekanisme Pembuangan Sampah: ${userData.pembuanganSampah}\n\n` +
+  `Terima kasih telah mendaftar! 🙏`,
   
   // Error messages
   NAME_EMPTY: 'Nama tidak boleh kosong. Silakan coba lagi.',
@@ -56,5 +63,8 @@ module.exports = {
   PEKERJAAN_AYAH_INVALID: 'Pilihan tidak valid. Silakan pilih nomor 1 sampai 4 untuk pekerjaan ayah.',
   PENDIDIKAN_IBU_INVALID: 'Pilihan tidak valid. Silakan pilih nomor 1 sampai 5 untuk pendidikan terakhir ibu.',
   PEKERJAAN_IBU_INVALID: 'Pilihan tidak valid. Silakan pilih nomor 1 sampai 4 untuk pekerjaan ibu.',
-  PENDAPATAN_ORTU_INVALID: 'Pilihan tidak valid. Silakan pilih nomor 1 sampai 5 untuk pendapatan orang tua.'
+  PENDAPATAN_ORTU_INVALID: 'Pilihan tidak valid. Silakan pilih nomor 1 sampai 5 untuk pendapatan orang tua.',
+  AIR_BERSIH_INVALID: 'Pilihan tidak valid. Silakan pilih nomor 1 atau 2 untuk ketersediaan air bersih.',
+  PEMBUANGAN_SAMPAH_INVALID: 'Pilihan tidak valid. Silakan pilih nomor 1 atau 2 untuk mekanisme pembuangan sampah.',
+  LOGIN_FAILED: 'Maaf, nama anak tidak ditemukan dalam database. Silahkan coba lagi atau daftar terlebih dahulu.'
 };
