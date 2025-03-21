@@ -10,7 +10,16 @@ async function handleRegistrationMenu(sock, remoteJid, userStateManager) {
   userStateManager.setState(remoteJid, { step: 'waitingForName' });
   await sock.sendMessage(remoteJid, { text: messages.ASK_NAME });
 }
-
+/**
+ * Handle login menu selection
+ * @param {Object} sock - WhatsApp socket instance
+ * @param {string} remoteJid - User's JID
+ * @param {Object} userStateManager - User state manager
+ */
+async function handleLoginMenu(sock, remoteJid, userStateManager) {
+  userStateManager.setState(remoteJid, { step: 'waitingForLoginName' });
+  await sock.sendMessage(remoteJid, { text: messages.ASK_LOGIN_NAME });
+}
 /**
  * Handle check data menu selection
  * @param {Object} sock - WhatsApp socket instance
@@ -23,6 +32,7 @@ async function handleCheckDataMenu(sock, remoteJid, userStateManager) {
 }
 
 module.exports = {
+  handleLoginMenu,
   handleRegistrationMenu,
   handleCheckDataMenu
 };
